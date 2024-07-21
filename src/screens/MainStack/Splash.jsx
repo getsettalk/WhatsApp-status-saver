@@ -24,6 +24,7 @@ const Splash = ({ navigation }) => {
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={[styles.textPrimary, { color: theme.textSecondary }]}>Download Whatsapp Status</Text>
+                    <Text style={[styles.textPrimary, { color: theme.textSecondary, fontSize: heightPercentageToDP(2) }]}>Made with ❤️ in India</Text>
                 </View>
             </View>
         </SafeAreaView>
