@@ -1,6 +1,7 @@
 const ScreenName = {
     SplashScreen: 'Splash',
-    WhatsAppAllStatusScreen: 'WhatsAppAllStatus'
+    WhatsAppAllStatusScreen: 'WhatsAppAllStatus',
+    PrivacyScreen: 'Privacy',
 }
 
 export default ScreenName

@@ -1,15 +1,18 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import React, { useContext } from 'react'
 import { heightPercentageToDP } from 'react-native-responsive-screen'
 import ThemeContext from '../utils/theme/ThemeContext'
+import { useNavigation } from '@react-navigation/native'
+import ScreenName from '../navigations/ScreenName'
 
 const FooterLinks = () => {
+    const navigation = useNavigation();
 
     const theme = useContext(ThemeContext)
 
     return (
         <View style={style.Footer}>
-            <TouchableOpacity >
+            <TouchableOpacity onPress={()=> navigation.navigate(ScreenName.PrivacyScreen)}>
                 <Text style={[style.btnName, { color: theme.textSecondary }]}>Read Policy</Text>
             </TouchableOpacity>
             <View style={{
@@ -18,7 +21,7 @@ const FooterLinks = () => {
                 backgroundColor: theme.textSecondary,
                 borderRadius: 100
             }} />
-            <TouchableOpacity >
+            <TouchableOpacity onPress={()=> Alert.alert("Contact Us", "Contact us via our email rajrock7254@gmail.com")}>
                 <Text style={[style.btnName, { color: theme.textSecondary }]}>Contact us</Text>
             </TouchableOpacity>
         </View>

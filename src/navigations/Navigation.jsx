@@ -7,6 +7,7 @@ import Splash from '../screens/MainStack/Splash'
 import WhatsAppAllStatus from '../screens/MainStack/WhatsAppAllStatus'
 import ThemeContext from '../utils/theme/ThemeContext'
 import theme from '../utils/theme/theme'
+import Privacy from '../screens/MainStack/Privacy'
 
 const Navigation = () => {
     const Stack = createNativeStackNavigator()
@@ -20,6 +21,9 @@ const Navigation = () => {
                 }}>
                     <Stack.Screen name={ScreenName.SplashScreen} component={Splash} />
                     <Stack.Screen name={ScreenName.WhatsAppAllStatusScreen} component={WhatsAppAllStatus} />
+                    <Stack.Screen name={ScreenName.PrivacyScreen} component={Privacy} options={{
+                        presentation:'modal'
+                    }} />
                 </Stack.Navigator>
             </NavigationContainer>
         </ThemeContext.Provider>

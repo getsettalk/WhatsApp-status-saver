@@ -5,7 +5,7 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-const Header = ({ name = "Rimeso WhatsApp Status Saver" }) => {
+const Header = ({ name = "WhatsSaver" }) => {
     const theme = useContext(ThemeContext)
     const isDarkMode = useColorScheme() == "dark";
 
