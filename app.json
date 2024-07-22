@@ -1,4 +1,7 @@
 {
   "name": "Whatsapp2024",
-  "displayName": "Whatsapp2024"
+  "displayName": "Whatsapp2024",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-2902382372508586~7123037157"
+  }
 }

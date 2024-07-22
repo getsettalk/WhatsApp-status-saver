@@ -1606,7 +1606,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.8.4":
   version: 7.24.8
   resolution: "@babel/runtime@npm:7.24.8"
   dependencies:
@@ -1742,6 +1742,13 @@ __metadata:
   version: 2.0.3
   resolution: "@humanwhocodes/object-schema@npm:2.0.3"
   checksum: d3b78f6c5831888c6ecc899df0d03bcc25d46f3ad26a11d7ea52944dc36a35ef543fad965322174238d677a43d5c694434f6607532cff7077062513ad7022631
+  languageName: node
+  linkType: hard
+
+"@iabtcf/core@npm:^1.5.3":
+  version: 1.5.6
+  resolution: "@iabtcf/core@npm:1.5.6"
+  checksum: 561626b626ee476dea5dd3a6ed0ebc26caac2475fc9509583f0e66c92ad67c3a2c2816b3516a4f043904b40607c9a4d44cbacbf09a5897740fd273e057c02c2c
   languageName: node
   linkType: hard
 
@@ -3162,6 +3169,7 @@ __metadata:
     react: 18.2.0
     react-native: 0.74.3
     react-native-fs: ^2.20.0
+    react-native-google-mobile-ads: ^14.1.0
     react-native-permissions: ^4.1.5
     react-native-render-html: ^6.3.4
     react-native-responsive-screen: ^1.4.2
@@ -4343,6 +4351,13 @@ __metadata:
   version: 2.0.0
   resolution: "depd@npm:2.0.0"
   checksum: abbe19c768c97ee2eed6282d8ce3031126662252c58d711f646921c9623f9052e3e1906443066beec1095832f534e57c523b7333f8e7e0d93051ab6baef5ab3a
+  languageName: node
+  linkType: hard
+
+"dequal@npm:^2.0.2":
+  version: 2.0.3
+  resolution: "dequal@npm:2.0.3"
+  checksum: 8679b850e1a3d0ebbc46ee780d5df7b478c23f335887464023a631d1b9af051ad4a6595a44220f9ff8ff95a8ddccf019b5ad778a976fd7bbf77383d36f412f90
   languageName: node
   linkType: hard
 
@@ -8279,6 +8294,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-google-mobile-ads@npm:^14.1.0":
+  version: 14.1.0
+  resolution: "react-native-google-mobile-ads@npm:14.1.0"
+  dependencies:
+    "@iabtcf/core": ^1.5.3
+    use-deep-compare-effect: ^1.8.1
+  peerDependencies:
+    expo: ">=47.0.0"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: 13d8ac2bbafb13e1680d95deb76bb47ee0e12fb27823958f33713b3a4d3abe2ddab95772435fc3ddbd7c0207148fb7c0a7b58580252c647aa842c25d8e7cefc1
+  languageName: node
+  linkType: hard
+
 "react-native-permissions@npm:^4.1.5":
   version: 4.1.5
   resolution: "react-native-permissions@npm:4.1.5"
@@ -9775,6 +9805,18 @@ __metadata:
   version: 1.19.11
   resolution: "urijs@npm:1.19.11"
   checksum: f9b95004560754d30fd7dbee44b47414d662dc9863f1cf5632a7c7983648df11d23c0be73b9b4f9554463b61d5b0a520b70df9e1ee963ebb4af02e6da2cc80f3
+  languageName: node
+  linkType: hard
+
+"use-deep-compare-effect@npm:^1.8.1":
+  version: 1.8.1
+  resolution: "use-deep-compare-effect@npm:1.8.1"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    dequal: ^2.0.2
+  peerDependencies:
+    react: ">=16.13"
+  checksum: 2b9b6291df3f772f44d259b352e5d998963ccee0db2efeb76bb05525d928064aeeb69bb0dee5a5e428fea7cf3db67c097a770ebd30caa080662b565f6ef02b2e
   languageName: node
   linkType: hard
 
