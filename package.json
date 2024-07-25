@@ -16,7 +16,7 @@
     "react": "18.2.0",
     "react-native": "0.74.3",
     "react-native-fs": "^2.20.0",
-    "react-native-google-mobile-ads": "^14.1.0",
+    "react-native-google-mobile-ads": "^14.2.0",
     "react-native-permissions": "^4.1.5",
     "react-native-render-html": "^6.3.4",
     "react-native-responsive-screen": "^1.4.2",

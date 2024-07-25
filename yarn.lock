@@ -3169,7 +3169,7 @@ __metadata:
     react: 18.2.0
     react-native: 0.74.3
     react-native-fs: ^2.20.0
-    react-native-google-mobile-ads: ^14.1.0
+    react-native-google-mobile-ads: ^14.2.0
     react-native-permissions: ^4.1.5
     react-native-render-html: ^6.3.4
     react-native-responsive-screen: ^1.4.2
@@ -8294,9 +8294,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-google-mobile-ads@npm:^14.1.0":
-  version: 14.1.0
-  resolution: "react-native-google-mobile-ads@npm:14.1.0"
+"react-native-google-mobile-ads@npm:^14.2.0":
+  version: 14.2.0
+  resolution: "react-native-google-mobile-ads@npm:14.2.0"
   dependencies:
     "@iabtcf/core": ^1.5.3
     use-deep-compare-effect: ^1.8.1
@@ -8305,7 +8305,7 @@ __metadata:
   peerDependenciesMeta:
     expo:
       optional: true
-  checksum: 13d8ac2bbafb13e1680d95deb76bb47ee0e12fb27823958f33713b3a4d3abe2ddab95772435fc3ddbd7c0207148fb7c0a7b58580252c647aa842c25d8e7cefc1
+  checksum: 76dc6a1be3a23e57c74df7c6d455b47aa37f93fcdf3cd3bea407dd1c50f9d5060febb117c67cd11b0026b40c615ae74eb431ad1c3f3cbd301321d841b944c9a3
   languageName: node
   linkType: hard
 
