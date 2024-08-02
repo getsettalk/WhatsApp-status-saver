@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback, memo } from 'react';
-import { View, StyleSheet, SafeAreaView, StatusBar, useColorScheme, FlatList, Image, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, SafeAreaView, StatusBar, useColorScheme, FlatList, Image, TouchableOpacity, Dimensions, ActivityIndicator, Text } from 'react-native';
 import ThemeContext from '../../utils/theme/ThemeContext';
 import Header from '../../component/Header';
 import FooterLinks from '../../component/FooterLinks';
@@ -55,9 +55,9 @@ const WhatsAppAllStatus = ({ navigation }) => {
     };
 
     const renderItem = ({ item, index }) => {
-        const isVideo = item.path.toLowerCase().endsWith('.mp4') || item.path.toLowerCase().endsWith('.mov');
+        const isVideo = item?.mime?.startsWith('video/');
         const itemHeight = COLUMN_WIDTH * (1 + Math.random() * 0.5);
-
+        console.log("OPOPOP", item)
         return (
             <TouchableOpacity
                 style={[styles.item, { height: itemHeight, backgroundColor: theme.textPrimary }]}
@@ -66,7 +66,7 @@ const WhatsAppAllStatus = ({ navigation }) => {
                 {isVideo ? (
                     <View style={styles.videoContainer}>
                         <Video
-                            source={{ uri: `file://${item.path}` }}
+                            source={{ uri: item.uri }}
                             style={styles.media}
                             resizeMode="cover"
                             paused={true}
@@ -77,13 +77,20 @@ const WhatsAppAllStatus = ({ navigation }) => {
                     </View>
                 ) : (
                     <Image
-                        source={{ uri: `file://${item.path}` }}
+                        source={{ uri: item.uri }}
                         style={styles.media}
                         resizeMode="cover"
                     />
                 )}
             </TouchableOpacity>
         );
+    };
+    const EmptyStateMessage = () => {
+        return (
+            <View style={styles.emptyStateContainer}>
+                <Text style={styles.emptyStateText}>No WhatsApp status found</Text>
+            </View>
+        )
     };
 
     return (
@@ -92,16 +99,20 @@ const WhatsAppAllStatus = ({ navigation }) => {
             <View style={styles.mainContent}>
                 <Header name='WhatsApp Status' />
                 <View style={styles.listContainer}>
-                    {Loading && <ActivityIndicator color={theme.secondary}  />}
-                    <FlatList
-                        data={statusData}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                        numColumns={2}
-                        contentContainerStyle={styles.flatListContent}
-                        refreshing={refreshing}
-                        onRefresh={onRefresh}
-                    />
+                    {Loading && <ActivityIndicator color={theme.secondary} />}
+                    {!Loading && statusData.length === 0 ? (
+                        <EmptyStateMessage />
+                    ) : (
+                        <FlatList
+                            data={statusData}
+                            renderItem={renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                            numColumns={2}
+                            contentContainerStyle={styles.flatListContent}
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                        />
+                    )}
                 </View>
                 <FooterLinks />
             </View>
@@ -147,6 +158,16 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: '40%',
         left: '43%'
+    },
+    emptyStateContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    emptyStateText: {
+        fontSize: 16,
+        color: '#444',
+        textAlign: 'center',
     },
 });
 

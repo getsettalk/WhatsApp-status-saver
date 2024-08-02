@@ -1,31 +1,53 @@
-import { PermissionsAndroid, Platform, Linking } from 'react-native';
+import {
+  Platform,
+  Linking,
+  Alert
+} from 'react-native';
+import {
+  PERMISSIONS,
+  RESULTS,
+  request,
+  requestMultiple,
+  openSettings
+} from 'react-native-permissions';
 
 export const requestPermissions = async () => {
-  if (Platform.Version >= 33) { // Android 13 and above
-    return requestMediaPermissions();
-  } else if (Platform.Version >= 30) { // Android 11 and 12
-    return requestManageExternalStoragePermission();
-  } else { // Android 10 and below
-    return requestStoragePermissions();
+  if (Platform.OS === 'android') {
+    if (Platform.Version >= 33) { // Android 13 and above
+      return requestMediaPermissions();
+    } else if (Platform.Version >= 29) { // Android 10 and above (but below 13)
+      return requestStoragePermissions();
+    } else { // Below Android 10
+      return requestLegacyStoragePermissions();
+    }
   }
+  // Add iOS permissions here if needed
+  return false;
 };
 
 const requestMediaPermissions = async () => {
   try {
-    const permissions = await PermissionsAndroid.requestMultiple([
-      PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
-      PermissionsAndroid.PERMISSIONS.READ_MEDIA_VIDEO,
+    const results = await requestMultiple([
+      PERMISSIONS.ANDROID.READ_MEDIA_IMAGES,
+      PERMISSIONS.ANDROID.READ_MEDIA_VIDEO,
     ]);
 
     if (
-      permissions['android.permission.READ_MEDIA_IMAGES'] === PermissionsAndroid.RESULTS.GRANTED &&
-      permissions['android.permission.READ_MEDIA_VIDEO'] === PermissionsAndroid.RESULTS.GRANTED
+      results[PERMISSIONS.ANDROID.READ_MEDIA_IMAGES] === RESULTS.GRANTED &&
+      results[PERMISSIONS.ANDROID.READ_MEDIA_VIDEO] === RESULTS.GRANTED
     ) {
       console.log('Media permissions granted');
       return true;
     } else {
       console.log('Media permissions denied');
-      alert('The app needs access to your media files to function properly.');
+      Alert.alert(
+        'Permission Required',
+        'The app needs access to your media files to function properly.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Open Settings', onPress: openSettings }
+        ]
+      );
       return false;
     }
   } catch (error) {
@@ -34,53 +56,63 @@ const requestMediaPermissions = async () => {
   }
 };
 
-const requestManageExternalStoragePermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.MANAGE_EXTERNAL_STORAGE);
-    if (!granted) {
-      console.log("MANAGE_EXTERNAL_STORAGE permission not granted, requesting...");
-      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.MANAGE_EXTERNAL_STORAGE);
-      if (result !== PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("MANAGE_EXTERNAL_STORAGE permission denied, opening settings...");
-        alert(
-          'This app needs access to manage all files on your device. ' +
-          'Please grant this permission in the app settings.',
-          [
-            { text: 'Cancel', style: 'cancel' },
-            { text: 'Open Settings', onPress: () => Linking.openSettings() },
-          ]
-        );
-        return false;
-      }
-    }
-    console.log('MANAGE_EXTERNAL_STORAGE permission granted');
-    return true;
-  } catch (error) {
-    console.error('Error checking or requesting MANAGE_EXTERNAL_STORAGE permission:', error);
-    return false;
-  }
-};
-
 const requestStoragePermissions = async () => {
   try {
-    const granted = await PermissionsAndroid.requestMultiple([
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    ]);
+    const readPermission = await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+    let writePermission = RESULTS.GRANTED;
 
-    if (
-      granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED &&
-      granted['android.permission.WRITE_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED
-    ) {
+    if (Platform.Version < 30) {  // For Android 10 (API 29)
+      writePermission = await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+    }
+
+    if (readPermission === RESULTS.GRANTED && writePermission === RESULTS.GRANTED) {
       console.log('Storage permissions granted');
       return true;
     } else {
       console.log('Storage permissions denied');
-      alert('The app needs storage permissions to function properly.');
+      Alert.alert(
+        'Permission Required',
+        'The app needs storage permissions to function properly.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Open Settings', onPress: openSettings }
+        ]
+      );
       return false;
     }
   } catch (error) {
     console.error('Error requesting storage permissions:', error);
+    return false;
+  }
+};
+
+const requestLegacyStoragePermissions = async () => {
+  try {
+    const results = await requestMultiple([
+      PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+      PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+    ]);
+
+    if (
+      results[PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE] === RESULTS.GRANTED &&
+      results[PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE] === RESULTS.GRANTED
+    ) {
+      console.log('Legacy storage permissions granted');
+      return true;
+    } else {
+      console.log('Legacy storage permissions denied');
+      Alert.alert(
+        'Permission Required',
+        'The app needs storage permissions to function properly.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Open Settings', onPress: openSettings }
+        ]
+      );
+      return false;
+    }
+  } catch (error) {
+    console.error('Error requesting legacy storage permissions:', error);
     return false;
   }
 };

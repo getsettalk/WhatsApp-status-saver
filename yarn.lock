@@ -2212,6 +2212,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-async-storage/async-storage@npm:^1.24.0":
+  version: 1.24.0
+  resolution: "@react-native-async-storage/async-storage@npm:1.24.0"
+  dependencies:
+    merge-options: ^3.0.4
+  peerDependencies:
+    react-native: ^0.0.0-0 || >=0.60 <1.0
+  checksum: 7e56a2e97f48332f57c56ebf473b763c7ca2b1ef82f4b5f8e1c73350231ec91b8eafc4e4d1f972c4c1005da0d304816fa725dc6f07a8a7543e90f8bd16c22ab4
+  languageName: node
+  linkType: hard
+
 "@react-native-camera-roll/camera-roll@npm:^7.8.3":
   version: 7.8.3
   resolution: "@react-native-camera-roll/camera-roll@npm:7.8.3"
@@ -3153,6 +3164,7 @@ __metadata:
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
+    "@react-native-async-storage/async-storage": ^1.24.0
     "@react-native-camera-roll/camera-roll": ^7.8.3
     "@react-native/babel-preset": 0.74.85
     "@react-native/eslint-config": 0.74.85
@@ -3174,6 +3186,7 @@ __metadata:
     react-native-render-html: ^6.3.4
     react-native-responsive-screen: ^1.4.2
     react-native-safe-area-context: ^4.10.8
+    react-native-scoped-storage: ^1.9.5
     react-native-screens: ^3.32.0
     react-native-share: ^10.2.1
     react-native-vector-icons: ^10.1.0
@@ -6010,6 +6023,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-plain-obj@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "is-plain-obj@npm:2.1.0"
+  checksum: cec9100678b0a9fe0248a81743041ed990c2d4c99f893d935545cfbc42876cbe86d207f3b895700c690ad2fa520e568c44afc1605044b535a7820c1d40e38daa
+  languageName: node
+  linkType: hard
+
 "is-plain-object@npm:^2.0.4":
   version: 2.0.4
   resolution: "is-plain-object@npm:2.0.4"
@@ -7096,6 +7116,15 @@ __metadata:
   version: 5.2.1
   resolution: "memoize-one@npm:5.2.1"
   checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
+  languageName: node
+  linkType: hard
+
+"merge-options@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "merge-options@npm:3.0.4"
+  dependencies:
+    is-plain-obj: ^2.1.0
+  checksum: d86ddb3dd6e85d558dbf25dc944f3527b6bacb944db3fdda6e84a3f59c4e4b85231095f58b835758b9a57708342dee0f8de0dffa352974a48221487fe9f4584f
   languageName: node
   linkType: hard
 
@@ -8359,6 +8388,15 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: eced388ae7cc712f75e43cba302b612c8fecceb8ec8b39cff21b6bc29debe2fdc24423f67609af244d919c3ed871dd1d36c6adc97a8960a938984d333490e653
+  languageName: node
+  linkType: hard
+
+"react-native-scoped-storage@npm:^1.9.5":
+  version: 1.9.5
+  resolution: "react-native-scoped-storage@npm:1.9.5"
+  peerDependencies:
+    react-native: "*"
+  checksum: b84c6740869d4b91f0133eee3ba348dc04d2ebbe7636cb5910593a55034a8bc90e4929651b7ecaa2bb95852fb24aa96324638d31b74976df28dbadd848c8002e
   languageName: node
   linkType: hard
 
