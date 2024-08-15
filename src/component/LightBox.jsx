@@ -8,11 +8,12 @@ import { saveStatus } from '../utils/theme/FileManager';
 const { width, height } = Dimensions.get('window');
 
 const LightBox = ({ isVisible, onClose, media }) => {
-    const isVideo = media && (media.path.toLowerCase().endsWith('.mp4') || media.path.toLowerCase().endsWith('.mov'));
+
+    const isVideo = media && (media.name.toLowerCase().endsWith('.mp4') || media.name.toLowerCase().endsWith('.mov'));
 
     const handleSave = async () => {
         if (media) {
-            const success = await saveStatus(media.path);
+            const success = await saveStatus(media?.url || media?.path);
             if (success) {
                 Alert.alert('WhatsApp Status', 'WhatsApp Status saved successfully!');
             } else {
@@ -24,10 +25,7 @@ const LightBox = ({ isVisible, onClose, media }) => {
     const handleShare = async () => {
         if (media) {
             try {
-                let filePath = media.path;
-                if (Platform.OS === 'android' && !filePath.startsWith('file://')) {
-                    filePath = `file://${filePath}`;
-                }
+                let filePath = media?.uri || media.path;
 
                 const options = {
                     url: filePath,
@@ -52,7 +50,6 @@ const LightBox = ({ isVisible, onClose, media }) => {
             transparent={true}
             visible={isVisible}
             onRequestClose={onClose}
-
         >
             <StatusBar hidden />
             <View style={styles.container}>
@@ -61,7 +58,7 @@ const LightBox = ({ isVisible, onClose, media }) => {
                 </TouchableOpacity>
                 {isVideo ? (
                     <Video
-                        source={{ uri: `file://${media?.path}` }}
+                        source={{ uri: media?.uri || media?.path }}
                         style={styles.media}
                         resizeMode="contain"
                         controls={true}
@@ -69,7 +66,7 @@ const LightBox = ({ isVisible, onClose, media }) => {
                     />
                 ) : (
                     <Image
-                        source={{ uri: `file://${media?.path}` }}
+                        source={{ uri: media?.uri || media?.path }}
                         style={styles.media}
                         resizeMode="contain"
                     />
@@ -86,6 +83,7 @@ const LightBox = ({ isVisible, onClose, media }) => {
         </Modal>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {

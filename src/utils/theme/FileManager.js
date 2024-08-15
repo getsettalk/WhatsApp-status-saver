@@ -96,6 +96,7 @@ const findStatusFilesAndroid11Plus = async () => {
       const mediaFiles = statusFiles.filter(file => isMediaFile(file.name)).map(file => ({
         name: file.name,
         path: file.uri,
+        mime: getMimeType(file.name),
         mtime: file.lastModified,
         size: file.size,
       }));
@@ -113,6 +114,7 @@ const findStatusFilesAndroid11Plus = async () => {
 
   return statusFiles;
 };
+
 const findStatusFilesLegacy = async () => {
   let allFiles = [];
   for (const path of WHATSAPP_FOLDERS) {
@@ -238,7 +240,7 @@ export const saveStatus = async (filePath) => {
       // Convert the content URI to a file path
       const fileInfo = await ScopedStorage.getDocumentContent(filePath);
       if (fileInfo && fileInfo.filePath) {
-        fileUri = `file://${fileInfo.filePath}`;
+        fileUri = fileInfo.filePath;
       } else {
         throw new Error('Unable to get file path from scoped storage');
       }

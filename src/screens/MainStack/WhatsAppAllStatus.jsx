@@ -66,7 +66,7 @@ const WhatsAppAllStatus = ({ navigation }) => {
                 {isVideo ? (
                     <View style={styles.videoContainer}>
                         <Video
-                            source={{ uri: item.uri }}
+                            source={{ uri: item?.uri || item?.path  }}
                             style={styles.media}
                             resizeMode="cover"
                             paused={true}
@@ -77,7 +77,7 @@ const WhatsAppAllStatus = ({ navigation }) => {
                     </View>
                 ) : (
                     <Image
-                        source={{ uri: item.uri }}
+                        source={{ uri: item?.uri || item?.path  }}
                         style={styles.media}
                         resizeMode="cover"
                     />
